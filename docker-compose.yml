@@ -4,7 +4,7 @@ services:
       context: .
       args:
         - CTBVER=${CTBVER}
-    image: jafea7/ctbrec-alpine:${CTBVER}
+    image: ghcr.io/justsudo/ctbrec-alpine:${CTBVER}
     container_name: ctbrec
     environment:
       - TZ=${TZ}
