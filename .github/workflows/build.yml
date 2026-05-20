@@ -64,7 +64,7 @@ jobs:
           push: true
           tags: |
             ${{ env.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}
-            ${{ steps.version.outputs.VERSION != 'latest' && env.DOCKER_IMAGE_NAME }}:latest
+            ${{ steps.version.outputs.VERSION != 'latest' && format('{0}:latest', env.DOCKER_IMAGE_NAME) || '' }}
           build-args: |
             CTBVER=${{ steps.ctbver.outputs.CTBVER }}
 
@@ -77,7 +77,7 @@ jobs:
           push: true
           tags: |
             ${{ env.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.VERSION }}-arm64
-            ${{ steps.version.outputs.VERSION != 'latest' && env.DOCKER_IMAGE_NAME }}:latest-arm64
+            ${{ steps.version.outputs.VERSION != 'latest' && format('{0}:latest-arm64', env.DOCKER_IMAGE_NAME) || '' }}
           build-args: |
             CTBVER=${{ steps.ctbver.outputs.CTBVER }}
 
