@@ -6,7 +6,7 @@
 FROM alpine:latest AS base
 
 ARG TARGETPLATFORM
-ARG S6_OVERLAY_VERSION=3.2.0.2
+ARG S6_OVERLAY_VERSION=3.2.3.0
 
 ARG CTBVER
 ENV CTBVER=${CTBVER}
@@ -14,6 +14,9 @@ ENV HOME=/app
 
 # Copy the rootfs layout including files
 COPY rootfs/ /
+
+# Ensure execute permissions on s6-overlay scripts and app scripts (lost when copying from Windows)
+RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run /etc/s6-overlay/s6-rc.d/*/type /app/*.sh /app/fixperms
 
 # Install necessary packages
 RUN apk add --update --no-cache \

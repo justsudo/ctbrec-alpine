@@ -34,6 +34,12 @@ if [ ! -n "$LATEST_VERSION" ]; then
     mkdir -p /app/config/$CTBVER
     cp -n /app/defaults/server.json /app/config/$CTBVER/
   fi
+else
+  # Pre-existing config found, ensure new version directory exists
+  if [ ! -e /app/config/$CTBVER/server.json ]; then
+    mkdir -p /app/config/$CTBVER
+    cp -n /app/defaults/server.json /app/config/$CTBVER/
+  fi
 fi
 
 # Symlink ffmpeg
